@@ -25,6 +25,11 @@ main {
   gap: 2rem;
 }
 
+#bitcoin-section {
+  background: #f9f9e6; /* Light gold for BTC theme */
+  border-left: 4px solid #f7931a; /* Bitcoin orange */
+}
+
 section {
   background: white;
   border-radius: 8px;
