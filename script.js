@@ -35,7 +35,7 @@ function getWeatherDescription(code) {
 
 function loadNews() {
   // Option A: TheNewsAPI free (replace with your key after signup)
-  // const apiKey = 'YOUR_THENewsAPI_KEY_HERE';
+  // const apiKey = '7c40535137c54077aa96b4aff0aae0b9';
   // const url = `https://api.thenewsapi.com/v1/news/top?api_token=${apiKey}&locale=sv&language=es,en&limit=8`;
 
   // Option B: NewsAPI.org (sign up free at newsapi.org)
