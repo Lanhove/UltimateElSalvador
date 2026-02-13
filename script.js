@@ -76,7 +76,7 @@ function loadNews() {
 
   // Option B: NewsAPI.org (sign up free at newsapi.org)
   const apiKey = '7c40535137c54077aa96b4aff0aae0b9'; // ← put your key
-  const url = `https://newsapi.org/v2/top-headlines?country=sv&apiKey=${apiKey}&pageSize=8`;
+  const url = `https://newsapi.org/v2/everything?q=El+Salvador+OR+"Nayib+Bukele"+OR+Salvador&language=es,en&sortBy=publishedAt&apiKey=${apiKey}&pageSize=8`;
   // Or for mix en/es: `https://newsapi.org/v2/everything?q=El+Salvador+OR+Salvador&language=es,en&sortBy=publishedAt&apiKey=${apiKey}&pageSize=8`
 
   // Temporary placeholder if no key yet (shows dummy or use RSS)
@@ -89,6 +89,7 @@ function loadNews() {
     .then(res => res.json())
     .then(data => {
       const container = document.getElementById('news-container');
+      console.log("News API response:", data);  // ← Add this line
       container.innerHTML = '';
       if (data.articles && data.articles.length > 0) {
         data.articles.forEach(article => {
