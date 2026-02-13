@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   loadWeather();
   loadNews();
+  loadBitcoinInfo();  // ← Add this line
+});
 });
 async function loadBitcoinInfo() {
   const proxyUrl = 'https://api.allorigins.win/raw?url=';
