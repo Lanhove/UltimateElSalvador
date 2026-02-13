@@ -39,7 +39,7 @@ function loadNews() {
   // const url = `https://api.thenewsapi.com/v1/news/top?api_token=${apiKey}&locale=sv&language=es,en&limit=8`;
 
   // Option B: NewsAPI.org (sign up free at newsapi.org)
-  const apiKey = 'YOUR_NEWSAPI_KEY_HERE'; // ← put your key
+  const apiKey = '7c40535137c54077aa96b4aff0aae0b9'; // ← put your key
   const url = `https://newsapi.org/v2/top-headlines?country=sv&apiKey=${apiKey}&pageSize=8`;
   // Or for mix en/es: `https://newsapi.org/v2/everything?q=El+Salvador+OR+Salvador&language=es,en&sortBy=publishedAt&apiKey=${apiKey}&pageSize=8`
 
