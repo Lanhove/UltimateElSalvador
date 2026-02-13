@@ -2,7 +2,41 @@ document.addEventListener('DOMContentLoaded', () => {
   loadWeather();
   loadNews();
 });
-
+async function loadBitcoinInfo() {
+  const proxyUrl = 'https://api.allorigins.win/raw?url=';
+  const targetUrl = 'https://bitcoin.gob.sv/';
+  
+  try {
+    const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+    const html = await response.text();
+    
+    // Simple string parsing for key stats (robust enough for current page format)
+    const holdingsMatch = html.match(/BTC Holdings\s*<\/span>\s*<span[^>]*>([\d,]+\.?\d*)\s*BTC/);
+    const usdMatch = html.match(/\$([\d,]+(?:,\d+)?)/); // First major $ amount is treasury value
+    const change7dMatch = html.match(/Change $$   7d   $$.*?\+([\d,]+\.?\d*)\s*BTC/);
+    
+    let holdings = holdingsMatch ? holdingsMatch[1] : 'N/A';
+    let valueUSD = usdMatch ? usdMatch[1] : 'N/A';
+    let change7d = change7dMatch ? change7dMatch[1] : 'N/A';
+    
+    const btcDiv = document.createElement('div');
+    btcDiv.id = 'bitcoin-section';
+    btcDiv.innerHTML = `
+      <h2>El Salvador Bitcoin Treasury</h2>
+      <p><strong>Holdings:</strong> ${holdings} BTC</p>
+      <p><strong>Current Value:</strong> ≈ $${valueUSD} USD</p>
+      <p><strong>7-day Change:</strong> +${change7d} BTC</p>
+      <p><small>Source: <a href="https://bitcoin.gob.sv/" target="_blank">bitcoin.gob.sv</a> (real-time)</small></p>
+    `;
+    
+    document.querySelector('main').appendChild(btcDiv); // Adds below weather
+  } catch (err) {
+    console.error('Bitcoin fetch error:', err);
+    const fallback = document.createElement('div');
+    fallback.innerHTML = '<p>Error loading Bitcoin stats. Check console.</p>';
+    document.querySelector('main').appendChild(fallback);
+  }
+}
 function loadWeather() {
   const url = 'https://api.open-meteo.com/v1/forecast?latitude=13.6989&longitude=-89.1914&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m&timezone=America%2FEl_Salvador';
   
